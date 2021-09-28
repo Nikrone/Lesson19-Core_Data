@@ -28,7 +28,16 @@ class MainPresenter: MainPresenterProtocol {
     weak var view: MainViewProtocol?
 
     func viewDidLoad() {
-
+        DatabaseService.shared.entitiesFor(
+            type: Note.self,
+            context: DatabaseService.shared.persistentContainer.mainContext,
+            closure: { notes in
+                self.textArray = notes.map({ note in
+                    return note.text!
+                })
+                self.view?.reloadTableView()
+            }
+        )
     }
     
     func removeText(for indexPath: IndexPath) {
@@ -38,6 +47,16 @@ class MainPresenter: MainPresenterProtocol {
     
     func addNewText(text: String) {
         textArray.append(text)
+//        сохранение в базу данных Core Data
+        DatabaseService.shared.insertEntityFor(
+            type: Note.self,
+            context: DatabaseService.shared.persistentContainer.mainContext,
+            closure: { note in
+                note.text = text
+                DatabaseService.shared.saveMain(nil)
+            }
+        )
+        
         view?.addElementToTableView(
             to: IndexPath(
                 row: numberOfElementsInTextArray() - 1,

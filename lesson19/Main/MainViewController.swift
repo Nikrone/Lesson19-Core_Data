@@ -11,6 +11,7 @@ import UIKit
 
 // MARK: View -
 protocol MainViewProtocol: AnyObject {
+    func reloadTableView()
     func addElementToTableView(to indexPath: IndexPath)
     func removeElementFromTableView(to indexPath: IndexPath)
 }
@@ -50,6 +51,10 @@ class MainViewController: UIViewController, MainViewProtocol {
     
     func removeElementFromTableView(to indexPath: IndexPath) {
         tableView.deleteRows(at: [indexPath], with: .automatic)
+    }
+    
+    func reloadTableView() {
+        tableView.reloadData()
     }
 }
 
