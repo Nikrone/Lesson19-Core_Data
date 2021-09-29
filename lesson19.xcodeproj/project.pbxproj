@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7101D3122704C8A30021AC3B /* CreationDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7101D3112704C8A30021AC3B /* CreationDate.swift */; };
 		716F55E027038664001C94DE /* lesson19.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 716F55DE27038664001C94DE /* lesson19.xcdatamodeld */; };
 		716F55ED27038D87001C94DE /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716F55E927038D86001C94DE /* Note.swift */; };
 		716F55F027038D87001C94DE /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 716F55EC27038D87001C94DE /* User.swift */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7101D3112704C8A30021AC3B /* CreationDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreationDate.swift; sourceTree = "<group>"; };
 		716F55DF27038664001C94DE /* lesson19.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = lesson19.xcdatamodel; sourceTree = "<group>"; };
 		716F55E927038D86001C94DE /* Note.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		716F55EC27038D87001C94DE /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 			children = (
 				716F55E927038D86001C94DE /* Note.swift */,
 				716F55EC27038D87001C94DE /* User.swift */,
+				7101D3112704C8A30021AC3B /* CreationDate.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -193,6 +196,7 @@
 			files = (
 				86E2303326FB88B900F96E19 /* AppDelegate.swift in Sources */,
 				716F55ED27038D87001C94DE /* Note.swift in Sources */,
+				7101D3122704C8A30021AC3B /* CreationDate.swift in Sources */,
 				86E2304A26FB8DB100F96E19 /* MainPresenter.swift in Sources */,
 				716F55F027038D87001C94DE /* User.swift in Sources */,
 				86E2303526FB88B900F96E19 /* SceneDelegate.swift in Sources */,

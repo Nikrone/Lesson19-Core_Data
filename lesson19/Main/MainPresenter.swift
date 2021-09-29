@@ -33,7 +33,7 @@ class MainPresenter: MainPresenterProtocol {
             context: DatabaseService.shared.persistentContainer.mainContext,
             closure: { notes in
                 self.textArray = notes.map({ note in
-                    return note.text!
+                    return note.text! + (note.creationDate?.date.description ?? "")
                 })
                 self.view?.reloadTableView()
             }
@@ -53,6 +53,7 @@ class MainPresenter: MainPresenterProtocol {
             context: DatabaseService.shared.persistentContainer.mainContext,
             closure: { note in
                 note.text = text
+                note.creationDate = CreationDate(date: Date())
                 DatabaseService.shared.saveMain(nil)
             }
         )

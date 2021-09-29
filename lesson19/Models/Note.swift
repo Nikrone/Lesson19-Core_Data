@@ -16,6 +16,6 @@ public class Note: NSManagedObject, Identifiable {
     }
 
     @NSManaged public var text: String?
-    @NSManaged public var creationDate: NSObject?
+    @NSManaged public var creationDate: CreationDate?
     @NSManaged public var user: User?
 }
