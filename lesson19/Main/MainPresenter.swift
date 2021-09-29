@@ -23,7 +23,7 @@ protocol MainPresenterProtocol {
 }
 
 class MainPresenter: MainPresenterProtocol {
-    private var textArray: [String] = []
+    private var textArray: [Note] = []
     
     weak var view: MainViewProtocol?
 
@@ -32,38 +32,43 @@ class MainPresenter: MainPresenterProtocol {
             type: Note.self,
             context: DatabaseService.shared.persistentContainer.mainContext,
             closure: { notes in
-                self.textArray = notes.map({ note in
-                    return note.text! + (note.creationDate?.date.description ?? "")
-                })
+                self.textArray = notes
                 self.view?.reloadTableView()
             }
         )
     }
     
     func removeText(for indexPath: IndexPath) {
-        textArray.remove(at: indexPath.row)
-        view?.removeElementFromTableView(to: indexPath)
+        DatabaseService.shared.delete(
+            textArray[indexPath.row],
+            context: DatabaseService.shared.persistentContainer.mainContext,
+            closure: { _ in
+                self.textArray.remove(at: indexPath.row)
+                DatabaseService.shared.saveMain(nil)
+                self.view?.removeElementFromTableView(to: indexPath)
+            })
+        
     }
     
     func addNewText(text: String) {
-        textArray.append(text)
 //        сохранение в базу данных Core Data
         DatabaseService.shared.insertEntityFor(
             type: Note.self,
             context: DatabaseService.shared.persistentContainer.mainContext,
             closure: { note in
                 note.text = text
-                note.creationDate = CreationDate(date: Date())
+//                note.creationDate = CreationDate(date: Date())
+                self.textArray.append(note)
                 DatabaseService.shared.saveMain(nil)
+                self.view?.addElementToTableView(
+                    to: IndexPath(
+                        row: self.numberOfElementsInTextArray() - 1,
+                        section: 0
+                    )
+                )
             }
         )
-        
-        view?.addElementToTableView(
-            to: IndexPath(
-                row: numberOfElementsInTextArray() - 1,
-                section: 0
-            )
-        )
+       
     }
     
     func numberOfElementsInTextArray() -> Int {
@@ -71,6 +76,6 @@ class MainPresenter: MainPresenterProtocol {
     }
     
     func elementInTextArray(for indexPath: IndexPath) -> String {
-        return textArray[indexPath.row]
+        return textArray[indexPath.row].text!
     }
 }
