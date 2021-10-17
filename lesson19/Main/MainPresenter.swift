@@ -42,7 +42,8 @@ class MainPresenter: MainPresenterProtocol {
         DatabaseService.shared.delete(
             textArray[indexPath.row],
             context: DatabaseService.shared.persistentContainer.mainContext,
-            closure: { _ in
+            closure: { [weak self] _ in
+                guard let self = self else { return }
                 self.textArray.remove(at: indexPath.row)
                 DatabaseService.shared.saveMain(nil)
                 self.view?.removeElementFromTableView(to: indexPath)
